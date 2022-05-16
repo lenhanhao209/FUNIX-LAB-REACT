@@ -31,11 +31,14 @@ const RenderCard = ({ item }) => {
 const Home = (props) => {
   const dishes = useSelector((state) => state.dishes);
   const promotions = useSelector((state) => state.promotions);
+  console.log(promotions);
   const leaders = useSelector((state) => state.leaders);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchDishes());
+  }, [dispatch]);
+  useEffect(() => {
     dispatch(fetchPromos());
   }, [dispatch]);
   return (
