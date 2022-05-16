@@ -37,16 +37,17 @@ const Home = (props) => {
 
   useEffect(() => {
     dispatch(fetchDishes());
-  }, [dispatch]);
-  useEffect(() => {
     dispatch(fetchPromos());
   }, [dispatch]);
+
   return (
     <div className="container">
       <div className="row align-items-start">
         <div className="col-12 col-md m-1">
           {dishes.isLoading ? (
             <Loading />
+          ) : dishes.errMess ? (
+            <div>{dishes.errMess} </div>
           ) : (
             <RenderCard item={dishes.dishes[0]} />
           )}
@@ -54,6 +55,8 @@ const Home = (props) => {
         <div className="col-12 col-md m-1">
           {promotions.isLoading ? (
             <Loading />
+          ) : promotions.errMess ? (
+            <div>{promotions.errMess} </div>
           ) : (
             <RenderCard item={promotions.promotions[0]} />
           )}
