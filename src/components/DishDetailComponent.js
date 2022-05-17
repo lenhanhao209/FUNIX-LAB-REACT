@@ -190,7 +190,6 @@ const DishDetail = (props) => {
           <ul className="list-unstyled">
             <Stagger>
               {comments.map((comment) => {
-                console.log(comment);
                 return (
                   <Fade in>
                     <li key={comment.id}>
