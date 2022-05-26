@@ -18,7 +18,7 @@ import {
 } from "reactstrap";
 import { NavLink } from "react-router-dom";
 
-function Header() {
+const Header = () => {
   const [state, setState] = useState({
     isNavOpen: false,
     isModalOpen: false,
@@ -149,6 +149,6 @@ function Header() {
       </Modal>
     </React.Fragment>
   );
-}
+};
 
 export default Header;

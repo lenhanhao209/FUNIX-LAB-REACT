@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchDishes } from "../redux/ActionCreators";
 import { Loading } from "./LoadingComponent";
 import { baseUrl } from "../shared/baseUrl";
+import useFetch from "./useFetch";
 
 const RenderMenuItem = ({ dish }) => {
   return (

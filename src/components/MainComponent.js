@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from "react";
+import React from "react";
 import DishDetail from "./DishDetailComponent";
 import Menu from "./MenuComponent";
 import Header from "./HeaderComponent";
