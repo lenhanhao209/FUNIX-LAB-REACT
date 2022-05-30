@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -12,7 +13,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchDishes } from "../redux/ActionCreators";
 import { Loading } from "./LoadingComponent";
 import { baseUrl } from "../shared/baseUrl";
-import useFetch from "./useFetch";
 
 const RenderMenuItem = ({ dish }) => {
   return (
