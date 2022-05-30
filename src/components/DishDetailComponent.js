@@ -157,9 +157,6 @@ const DishDetail = (props) => {
 
   useEffect(() => {
     dispatch(fetchDishes());
-  }, [dispatch]);
-
-  useEffect(() => {
     dispatch(fetchComments());
   }, [dispatch]);
 

@@ -8,7 +8,11 @@ import {
   CardSubtitle,
 } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchDishes, fetchPromos } from "../redux/ActionCreators";
+import {
+  fetchDishes,
+  fetchPromos,
+  fetchLeaders,
+} from "../redux/ActionCreators";
 import { Loading } from "./LoadingComponent";
 import { baseUrl } from "../shared/baseUrl";
 import { FadeTransform } from "react-animation-components";
@@ -37,12 +41,15 @@ const Home = (props) => {
   const dishes = useSelector((state) => state.dishes);
   const promotions = useSelector((state) => state.promotions);
   const leaders = useSelector((state) => state.leaders);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchDishes());
     dispatch(fetchPromos());
+    dispatch(fetchLeaders());
   }, [dispatch]);
+
   return (
     <div className="container">
       <div className="row align-items-start">
@@ -65,7 +72,13 @@ const Home = (props) => {
           )}
         </div>
         <div className="col-12 col-md m-1">
-          <RenderCard item={leaders[0]} />
+          {leaders.isLoading ? (
+            <Loading />
+          ) : leaders.errMess ? (
+            <div>{leaders.errMess} </div>
+          ) : (
+            <RenderCard item={leaders.leaders[0]} />
+          )}
         </div>
       </div>
     </div>

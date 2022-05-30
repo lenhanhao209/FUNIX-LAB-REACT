@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,13 +8,29 @@ import {
   Media,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLeaders } from "../redux/ActionCreators";
+import { baseUrl } from "../shared/baseUrl";
+import { Loading } from "./LoadingComponent";
+import { FadeTransform } from "react-animation-components";
 
-const About = (props) => {
-  const leaders = props.leaders.map((leader) => {
+const About = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchLeaders());
+  }, [dispatch]);
+  const leaders = useSelector((state) => state.leaders);
+
+  const leaderIds = leaders.leaders.map((leader) => {
+    console.log(leader);
     return (
       <div key={leader.id} className="col-12 mt-5">
         <div className="row">
-          <img className="col-md-2" src={leader.image} alt={leader.name} />
+          <img
+            className="col-md-2"
+            src={baseUrl + leader.image}
+            alt={leader.name}
+          />
           <div className="col-md-10">
             <h2>{leader.name}</h2>
             <p>{leader.designation}</p>
@@ -95,14 +111,25 @@ const About = (props) => {
           </Card>
         </div>
       </div>
-      <div className="row row-content">
-        <div className="col-12">
-          <h2>Corporate Leadership</h2>
+      {leaders.isLoading ? (
+        <Loading />
+      ) : leaders.errMess ? (
+        <div>{leaders.errMess} </div>
+      ) : (
+        <div className="row row-content">
+          <FadeTransform
+            in
+            transformProps={{ exitTransform: "scale(0.5) translateY(-50%)" }}
+          >
+            <div className="col-12">
+              <h2>Corporate Leadership</h2>
+            </div>
+            <div className="col-12">
+              <Media list>{leaderIds}</Media>
+            </div>
+          </FadeTransform>
         </div>
-        <div className="col-12">
-          <Media list>{leaders}</Media>
-        </div>
-      </div>
+      )}
     </div>
   );
 };
